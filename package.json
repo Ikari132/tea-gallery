@@ -1,0 +1,41 @@
+{
+  "name": "svelte-tailwind-snowpack",
+  "version": "1.0.0",
+  "author": {
+    "name": "Anton Aksionau",
+    "email": "ikari808@gmail.com",
+    "url": "http://ikari.work"
+  },
+  "scripts": {
+    "start": "snowpack dev",
+    "build": "snowpack build",
+    "ts-check": "svelte-check",
+    "build:css": "postcss --verbose"
+  },
+  "dependencies": {
+    "svelte": "^3.24.0",
+    "svelte-i18n": "^3.3.0",
+    "svelte-routing": "^1.4.2",
+    "tailwindcss-font-inter": "^2.0.0"
+  },
+  "devDependencies": {
+    "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-postcss": "^1.0.11",
+    "@snowpack/plugin-svelte": "^3.4.1",
+    "@snowpack/plugin-typescript": "^1.1.1",
+    "@tsconfig/svelte": "^1.0.10",
+    "@types/snowpack-env": "^2.3.3",
+    "autoprefixer": "^10.1.0",
+    "cssnano": "^4.1.10",
+    "postcss": "^8.2.1",
+    "postcss-apply": "^0.12.0",
+    "postcss-cli": "^8.3.1",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^14.0.0",
+    "snowpack": "^2.18.5",
+    "svelte-check": "^1.1.26",
+    "svelte-preprocess": "^4.6.1",
+    "tailwindcss": "^2.0.2",
+    "typescript": "^4.1.3"
+  }
+}
