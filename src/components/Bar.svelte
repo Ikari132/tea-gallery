@@ -65,6 +65,7 @@
         clearInterval(timerInterval);
         timesUp = true;
         timePassed = 0;
+        circleDasharray = "283";
     }
 
     function startTimer() {
