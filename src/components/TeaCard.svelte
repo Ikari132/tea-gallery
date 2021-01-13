@@ -24,6 +24,6 @@
 <div
     class="tea-card flex flex-col items-start justify-start bg-white rounded-xl shadow p-4">
     <h2>{tea.name}</h2>
-
+    <div>Temperature:{tea.temperature}</div>
     <Button on:click={clickHandler}>Brew</Button>
 </div>

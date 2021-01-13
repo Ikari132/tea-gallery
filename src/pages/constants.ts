@@ -5,7 +5,7 @@ export const BrewingGlasses: TBrewingMethod[] = [
     "teapot",
 ]
 
-export const CATEGORIES_MAP = {
+export const CATEGORIES_TRANSLATE = {
     GREEN: "Зеленый",
     RED: "Красный",
     WHITE: "Белый",
@@ -14,8 +14,20 @@ export const CATEGORIES_MAP = {
     SHEN: "Шен",
     OOLONG: "Улун",
     OTHERS: "НеЧай",
-    MATI: "Мате",
+    MATE: "Мате",
     BLACK: "Черный",
+}
+export const CATEGORIES_MAP = {
+    GREEN: "GREEN",
+    RED: "RED",
+    WHITE: "WHITE",
+    JAPANESE: "JAPANESE",
+    SHU: "SHU",
+    SHEN: "SHEN",
+    OOLONG: "OOLONG",
+    OTHERS: "OTHERS",
+    MATE: "MATE",
+    BLACK: "BLACK",
 }
 
 export const CATEGORIES_COLOR = {
@@ -27,6 +39,6 @@ export const CATEGORIES_COLOR = {
     [CATEGORIES_MAP.SHEN]: "#436b26",
     [CATEGORIES_MAP.OOLONG]: "#00b3ad",
     [CATEGORIES_MAP.OTHERS]: "#80559c",
-    [CATEGORIES_MAP.MATI]: "#93e22b",
+    [CATEGORIES_MAP.MATE]: "#93e22b",
     [CATEGORIES_MAP.BLACK]: "#131313",
 }
