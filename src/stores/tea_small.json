@@ -1,6 +1,6 @@
 [
     {
-        "name": "green",
+        "type": "green",
         "list": [
             {
                 "name": "Чжень Май",
@@ -18,7 +18,7 @@
         ]
     },
     {
-        "name": "red",
+        "type": "red",
         "list": [
             {
                 "name": "Лапсанг Сушонг",

@@ -12,3 +12,19 @@ export interface ITea {
     tags: string[];
     inStock: boolean;
 }
+export type ITeaType =
+    "GREEN" |
+    "RED" |
+    "WHITE" |
+    "JAPANESE" |
+    "SHU" |
+    "SHEN" |
+    "OOLONG" |
+    "OTHERS" |
+    "MATE" |
+    "BLACK";
+
+export interface ITeaGroup {
+    type: ITeaType;
+    list: ITea[];
+}

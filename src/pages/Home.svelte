@@ -2,14 +2,13 @@
   import { _ } from "svelte-i18n";
   import { navigate } from "svelte-routing";
   import TeaCard from "./../components/TeaCard.svelte";
-  import LinkButton from "./../components/LinkButton.svelte";
 
   import { currentTeaStore } from "./../stores/currentTeaStore";
   import { galleryStore } from "./../stores/galleryStore";
   import { CATEGORIES_COLOR } from "./constants";
 
-  const gallery: any = $galleryStore;
-  let tea = (gallery as any)[0]?.list[0];
+  const gallery = $galleryStore;
+  let tea = gallery[0]?.list[0];
   // let tea = (gallery as any)["Зеленый"]?.teaList[0];
   console.log("tea", tea, gallery);
 
@@ -49,17 +48,12 @@
             <h2 class="bg-gray-100 rounded-xl shadow p-4">
               <div
                 class="w-4 rounded-full"
-                style="background-color:{CATEGORIES_COLOR[teaGroup.name.toUpperCase()]};" />
-              {teaGroup.name}
+                style="background-color:{CATEGORIES_COLOR[teaGroup.type.toUpperCase()]};" />
+              {teaGroup.type}
             </h2>
             <div class="flex flex-row">
               {#each teaGroup.list as tea}
                 <TeaCard {tea} on:select={handleTeaSelect} />
-                <!-- <div
-                  class="m-2 p-4 text-md text-white bg-blue-500 rounded cursor-pointer select-none hover:bg-blue-600 active:bg-blue-700"
-                  on:click>
-                  {tea.name}
-                </div> -->
               {/each}
             </div>
           </div>
