@@ -2,6 +2,7 @@
     import { createEventDispatcher } from "svelte";
     import type { ITea } from "./../pages/types";
     import Button from "./../components/Button.svelte";
+    import Rating from "./Rating.svelte";
 
     export let tea: ITea;
     const dispatch = createEventDispatcher();
@@ -25,5 +26,6 @@
     class="tea-card flex flex-col items-start justify-start bg-white rounded-xl shadow p-4">
     <h2>{tea.name}</h2>
     <div>Temperature:{tea.temperature}</div>
+    <Rating rating={tea.rating} />
     <Button on:click={clickHandler}>Brew</Button>
 </div>
