@@ -149,6 +149,7 @@ function instance($$self, $$props, $$invalidate) {
 		clearInterval(timerInterval);
 		$$invalidate(0, timesUp = true);
 		timePassed = 0;
+		$$invalidate(2, circleDasharray = "283");
 	}
 
 	function startTimer() {

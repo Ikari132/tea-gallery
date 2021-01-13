@@ -13,6 +13,7 @@ import {
 	mount_component,
 	noop,
 	safe_not_equal,
+	space,
 	text,
 	transition_in,
 	transition_out
@@ -22,6 +23,9 @@ import { Router, Route } from "../web_modules/svelte-routing.js";
 import { setupI18n } from "./i18n/index.js";
 import { isLoading } from "../web_modules/svelte-i18n.js";
 import Home from "./pages/Home.js";
+import BrewTimer from "./pages/BrewTimer.js";
+import BrewMethod from "./pages/BrewMethod.js";
+import BrewPrepare from "./pages/BrewPrepare.js";
 
 function create_else_block(ctx) {
 	let router;
@@ -68,7 +72,7 @@ function create_else_block(ctx) {
 	};
 }
 
-// (9:0) {#if $isLoading}
+// (12:0) {#if $isLoading}
 function create_if_block(ctx) {
 	let t;
 
@@ -88,32 +92,94 @@ function create_if_block(ctx) {
 	};
 }
 
-// (12:2) <Router {url}>
+// (15:2) <Router {url}>
 function create_default_slot(ctx) {
-	let route;
+	let route0;
+	let t0;
+	let route1;
+	let t1;
+	let route2;
+	let t2;
+	let route3;
+	let t3;
+	let route4;
 	let current;
-	route = new Route({ props: { path: "/", component: Home } });
+	route0 = new Route({ props: { path: "/", component: Home } });
+
+	route1 = new Route({
+			props: {
+				path: "/brew/method",
+				component: BrewMethod
+			}
+		});
+
+	route2 = new Route({
+			props: {
+				path: "/brew/prepare",
+				component: BrewPrepare
+			}
+		});
+
+	route3 = new Route({
+			props: { path: "/brew", component: BrewMethod }
+		});
+
+	route4 = new Route({
+			props: { path: "/timer", component: BrewTimer }
+		});
 
 	return {
 		c() {
-			create_component(route.$$.fragment);
+			create_component(route0.$$.fragment);
+			t0 = space();
+			create_component(route1.$$.fragment);
+			t1 = space();
+			create_component(route2.$$.fragment);
+			t2 = space();
+			create_component(route3.$$.fragment);
+			t3 = space();
+			create_component(route4.$$.fragment);
 		},
 		m(target, anchor) {
-			mount_component(route, target, anchor);
+			mount_component(route0, target, anchor);
+			insert(target, t0, anchor);
+			mount_component(route1, target, anchor);
+			insert(target, t1, anchor);
+			mount_component(route2, target, anchor);
+			insert(target, t2, anchor);
+			mount_component(route3, target, anchor);
+			insert(target, t3, anchor);
+			mount_component(route4, target, anchor);
 			current = true;
 		},
 		p: noop,
 		i(local) {
 			if (current) return;
-			transition_in(route.$$.fragment, local);
+			transition_in(route0.$$.fragment, local);
+			transition_in(route1.$$.fragment, local);
+			transition_in(route2.$$.fragment, local);
+			transition_in(route3.$$.fragment, local);
+			transition_in(route4.$$.fragment, local);
 			current = true;
 		},
 		o(local) {
-			transition_out(route.$$.fragment, local);
+			transition_out(route0.$$.fragment, local);
+			transition_out(route1.$$.fragment, local);
+			transition_out(route2.$$.fragment, local);
+			transition_out(route3.$$.fragment, local);
+			transition_out(route4.$$.fragment, local);
 			current = false;
 		},
 		d(detaching) {
-			destroy_component(route, detaching);
+			destroy_component(route0, detaching);
+			if (detaching) detach(t0);
+			destroy_component(route1, detaching);
+			if (detaching) detach(t1);
+			destroy_component(route2, detaching);
+			if (detaching) detach(t2);
+			destroy_component(route3, detaching);
+			if (detaching) detach(t3);
+			destroy_component(route4, detaching);
 		}
 	};
 }

@@ -1,5 +1,5 @@
-import { S as SvelteComponent, b as init, a as safe_not_equal, d as create_slot, u as update_slot, t as transition_in, e as transition_out, g as getContext, f as component_subscribe, o as onMount, h as setContext, j as empty, k as insert, l as group_outros, m as check_outros, p as detach, q as onDestroy, v as assign, w as exclude_internal_props, x as create_component, y as mount_component, z as get_spread_update, A as get_spread_object, B as destroy_component } from './common/index-54742a68.js';
-import { w as writable, d as derived } from './common/index-8a23dc1d.js';
+import { S as SvelteComponent, b as init, s as safe_not_equal, d as create_slot, u as update_slot, t as transition_in, e as transition_out, g as getContext, f as component_subscribe, o as onMount, h as setContext, j as empty, k as insert, l as group_outros, m as check_outros, p as detach, q as onDestroy, v as assign, w as exclude_internal_props, x as create_component, y as mount_component, z as get_spread_update, A as get_spread_object, B as destroy_component, C as element, D as set_attributes, E as listen, c as createEventDispatcher } from './common/index-101c4350.js';
+import { w as writable, d as derived } from './common/index-12a25a8a.js';
 
 const LOCATION = {};
 const ROUTER = {};
@@ -109,6 +109,7 @@ const canUseDOM = Boolean(
     window.document.createElement
 );
 const globalHistory = createHistory(canUseDOM ? window : createMemorySource());
+const { navigate } = globalHistory;
 
 /**
  * Adapted from https://github.com/reach/router/blob/b60e6dd781d5d3a4bdaaf4de665649c0f6a7e78d/src/lib/utils.js
@@ -123,6 +124,16 @@ const STATIC_POINTS = 3;
 const DYNAMIC_POINTS = 2;
 const SPLAT_PENALTY = 1;
 const ROOT_POINTS = 1;
+
+/**
+ * Check if `string` starts with `search`
+ * @param {string} string
+ * @param {string} search
+ * @return {boolean}
+ */
+function startsWith(string, search) {
+  return string.substr(0, search.length) === search;
+}
 
 /**
  * Check if `segment` is a root segment
@@ -330,6 +341,86 @@ function match(route, uri) {
 }
 
 /**
+ * Add the query to the pathname if a query is given
+ * @param {string} pathname
+ * @param {string} [query]
+ * @return {string}
+ */
+function addQuery(pathname, query) {
+  return pathname + (query ? `?${query}` : "");
+}
+
+/**
+ * Resolve URIs as though every path is a directory, no files. Relative URIs
+ * in the browser can feel awkward because not only can you be "in a directory",
+ * you can be "at a file", too. For example:
+ *
+ *  browserSpecResolve('foo', '/bar/') => /bar/foo
+ *  browserSpecResolve('foo', '/bar') => /foo
+ *
+ * But on the command line of a file system, it's not as complicated. You can't
+ * `cd` from a file, only directories. This way, links have to know less about
+ * their current path. To go deeper you can do this:
+ *
+ *  <Link to="deeper"/>
+ *  // instead of
+ *  <Link to=`{${props.uri}/deeper}`/>
+ *
+ * Just like `cd`, if you want to go deeper from the command line, you do this:
+ *
+ *  cd deeper
+ *  # not
+ *  cd $(pwd)/deeper
+ *
+ * By treating every path as a directory, linking to relative paths should
+ * require less contextual information and (fingers crossed) be more intuitive.
+ * @param {string} to
+ * @param {string} base
+ * @return {string}
+ */
+function resolve(to, base) {
+  // /foo/bar, /baz/qux => /foo/bar
+  if (startsWith(to, "/")) {
+    return to;
+  }
+
+  const [toPathname, toQuery] = to.split("?");
+  const [basePathname] = base.split("?");
+  const toSegments = segmentize(toPathname);
+  const baseSegments = segmentize(basePathname);
+
+  // ?a=b, /users?b=c => /users?a=b
+  if (toSegments[0] === "") {
+    return addQuery(basePathname, toQuery);
+  }
+
+  // profile, /users/789 => /users/789/profile
+  if (!startsWith(toSegments[0], ".")) {
+    const pathname = baseSegments.concat(toSegments).join("/");
+
+    return addQuery((basePathname === "/" ? "" : "/") + pathname, toQuery);
+  }
+
+  // ./       , /users/123 => /users/123
+  // ../      , /users/123 => /users
+  // ../..    , /users/123 => /
+  // ../../one, /a/b/c/d   => /a/b/one
+  // .././one , /a/b/c/d   => /a/b/c/one
+  const allSegments = baseSegments.concat(toSegments);
+  const segments = [];
+
+  allSegments.forEach(segment => {
+    if (segment === "..") {
+      segments.pop();
+    } else if (segment !== ".") {
+      segments.push(segment);
+    }
+  });
+
+  return addQuery("/" + segments.join("/"), toQuery);
+}
+
+/**
  * Combines the `basepath` and the `path` into one path.
  * @param {string} basepath
  * @param {string} path
@@ -338,6 +429,18 @@ function combinePaths(basepath, path) {
   return `${stripSlashes(
     path === "/" ? basepath : `${stripSlashes(basepath)}/${stripSlashes(path)}`
   )}/`;
+}
+
+/**
+ * Decides whether a given `event` should result in a navigation or not.
+ * @param {object} event
+ */
+function shouldNavigate(event) {
+  return (
+    !event.defaultPrevented &&
+    event.button === 0 &&
+    !(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
+  );
 }
 
 /* node_modules/svelte-routing/src/Router.svelte generated by Svelte v3.29.7 */
@@ -873,4 +976,166 @@ class Route extends SvelteComponent {
 	}
 }
 
-export { Route, Router };
+/* node_modules/svelte-routing/src/Link.svelte generated by Svelte v3.29.7 */
+
+function create_fragment$2(ctx) {
+	let a;
+	let current;
+	let mounted;
+	let dispose;
+	const default_slot_template = /*#slots*/ ctx[11].default;
+	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[10], null);
+
+	let a_levels = [
+		{ href: /*href*/ ctx[0] },
+		{ "aria-current": /*ariaCurrent*/ ctx[2] },
+		/*props*/ ctx[1]
+	];
+
+	let a_data = {};
+
+	for (let i = 0; i < a_levels.length; i += 1) {
+		a_data = assign(a_data, a_levels[i]);
+	}
+
+	return {
+		c() {
+			a = element("a");
+			if (default_slot) default_slot.c();
+			set_attributes(a, a_data);
+		},
+		m(target, anchor) {
+			insert(target, a, anchor);
+
+			if (default_slot) {
+				default_slot.m(a, null);
+			}
+
+			current = true;
+
+			if (!mounted) {
+				dispose = listen(a, "click", /*onClick*/ ctx[5]);
+				mounted = true;
+			}
+		},
+		p(ctx, [dirty]) {
+			if (default_slot) {
+				if (default_slot.p && dirty & /*$$scope*/ 1024) {
+					update_slot(default_slot, default_slot_template, ctx, /*$$scope*/ ctx[10], dirty, null, null);
+				}
+			}
+
+			set_attributes(a, a_data = get_spread_update(a_levels, [
+				(!current || dirty & /*href*/ 1) && { href: /*href*/ ctx[0] },
+				(!current || dirty & /*ariaCurrent*/ 4) && { "aria-current": /*ariaCurrent*/ ctx[2] },
+				dirty & /*props*/ 2 && /*props*/ ctx[1]
+			]));
+		},
+		i(local) {
+			if (current) return;
+			transition_in(default_slot, local);
+			current = true;
+		},
+		o(local) {
+			transition_out(default_slot, local);
+			current = false;
+		},
+		d(detaching) {
+			if (detaching) detach(a);
+			if (default_slot) default_slot.d(detaching);
+			mounted = false;
+			dispose();
+		}
+	};
+}
+
+function instance$2($$self, $$props, $$invalidate) {
+	let $base;
+	let $location;
+	let { $$slots: slots = {}, $$scope } = $$props;
+	let { to = "#" } = $$props;
+	let { replace = false } = $$props;
+	let { state = {} } = $$props;
+	let { getProps = () => ({}) } = $$props;
+	const { base } = getContext(ROUTER);
+	component_subscribe($$self, base, value => $$invalidate(14, $base = value));
+	const location = getContext(LOCATION);
+	component_subscribe($$self, location, value => $$invalidate(15, $location = value));
+	const dispatch = createEventDispatcher();
+	let href, isPartiallyCurrent, isCurrent, props;
+
+	function onClick(event) {
+		dispatch("click", event);
+
+		if (shouldNavigate(event)) {
+			event.preventDefault();
+
+			// Don't push another entry to the history stack when the user
+			// clicks on a Link to the page they are currently on.
+			const shouldReplace = $location.pathname === href || replace;
+
+			navigate(href, { state, replace: shouldReplace });
+		}
+	}
+
+	$$self.$$set = $$props => {
+		if ("to" in $$props) $$invalidate(6, to = $$props.to);
+		if ("replace" in $$props) $$invalidate(7, replace = $$props.replace);
+		if ("state" in $$props) $$invalidate(8, state = $$props.state);
+		if ("getProps" in $$props) $$invalidate(9, getProps = $$props.getProps);
+		if ("$$scope" in $$props) $$invalidate(10, $$scope = $$props.$$scope);
+	};
+
+	let ariaCurrent;
+
+	$$self.$$.update = () => {
+		if ($$self.$$.dirty & /*to, $base*/ 16448) {
+			 $$invalidate(0, href = to === "/" ? $base.uri : resolve(to, $base.uri));
+		}
+
+		if ($$self.$$.dirty & /*$location, href*/ 32769) {
+			 $$invalidate(12, isPartiallyCurrent = startsWith($location.pathname, href));
+		}
+
+		if ($$self.$$.dirty & /*href, $location*/ 32769) {
+			 $$invalidate(13, isCurrent = href === $location.pathname);
+		}
+
+		if ($$self.$$.dirty & /*isCurrent*/ 8192) {
+			 $$invalidate(2, ariaCurrent = isCurrent ? "page" : undefined);
+		}
+
+		if ($$self.$$.dirty & /*getProps, $location, href, isPartiallyCurrent, isCurrent*/ 45569) {
+			 $$invalidate(1, props = getProps({
+				location: $location,
+				href,
+				isPartiallyCurrent,
+				isCurrent
+			}));
+		}
+	};
+
+	return [
+		href,
+		props,
+		ariaCurrent,
+		base,
+		location,
+		onClick,
+		to,
+		replace,
+		state,
+		getProps,
+		$$scope,
+		slots
+	];
+}
+
+class Link extends SvelteComponent {
+	constructor(options) {
+		super();
+		init(this, options, instance$2, create_fragment$2, safe_not_equal, { to: 6, replace: 7, state: 8, getProps: 9 });
+	}
+}
+
+export { Link, Route, Router, navigate };

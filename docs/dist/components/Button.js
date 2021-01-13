@@ -27,7 +27,7 @@ function create_fragment(ctx) {
 		c() {
 			button = element("button");
 			if (default_slot) default_slot.c();
-			attr(button, "class", "px-4 py-1 text-sm text-white bg-blue-500 rounded cursor-pointer select-none hover:bg-blue-600 active:bg-blue-700");
+			attr(button, "class", "px-4 py-2 text-md text-white bg-blue-500 rounded cursor-pointer select-none hover:bg-blue-600 active:bg-blue-700");
 			button.disabled = /*disabled*/ ctx[0];
 		},
 		m(target, anchor) {
