@@ -24,8 +24,8 @@
 
 <div
     class="tea-card flex flex-col items-start justify-start bg-white rounded-xl shadow p-4">
+    <Rating rating={tea.rating} />
     <h2>{tea.name}</h2>
     <div>Temperature:{tea.temperature}</div>
-    <Rating rating={tea.rating} />
     <Button on:click={clickHandler}>Brew</Button>
 </div>
