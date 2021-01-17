@@ -1,4 +1,4 @@
-import type { ITeaGroup } from "./../pages/types";
+import type { ITeaGroup } from "./../routes/types";
 import { readable } from "svelte/store";
 import tea from "./tea_small.json";
 

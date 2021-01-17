@@ -1,7 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import type { ITea, ITeaGroup } from "./../pages/types";
-    import { CATEGORIES_COLOR } from "./../pages/constants";
+    import type { ITea, ITeaGroup } from "./../routes/types";
+    import { CATEGORIES_COLOR } from "./../routes/constants";
     import TeaCard from "./TeaCard.svelte";
 
     export let teaGroup: ITeaGroup;

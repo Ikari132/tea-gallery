@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte";
-    import type { ITea } from "./../pages/types";
+    import type { ITea } from "./../routes/types";
     import Button from "./../components/Button.svelte";
     import Rating from "./Rating.svelte";
 
