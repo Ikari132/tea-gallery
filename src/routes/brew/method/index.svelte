@@ -1,7 +1,7 @@
 <script lang="ts">
   import { _ } from "svelte-i18n";
-  import { BrewingGlasses } from "./../constants";
-  import { currentTeaStore } from "./../../stores/currentTeaStore";
+  import { BrewingGlasses } from "./../../constants";
+  import { currentTeaStore } from "./../../../stores/currentTeaStore";
 
   let currentTea = {};
   const unsubscribeCurrentTeaStore = currentTeaStore.subscribe((val) => {

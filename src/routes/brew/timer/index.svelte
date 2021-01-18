@@ -1,8 +1,8 @@
 <script lang="ts">
   import { writable } from "svelte/store";
   import { _ } from "svelte-i18n";
-  import Button from "./../../components/Button.svelte";
-  import Water from "./../../components/Water.svelte";
+  import Button from "./../../../components/Button.svelte";
+  import Water from "./../../../components/Water.svelte";
 
   // let counter = 0;
   let counter = writable(0);

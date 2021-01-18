@@ -44,8 +44,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #fff;
+    // background: #fff;
     padding: 0 20px;
+    z-index: 9999;
 
     &__button {
       display: flex;

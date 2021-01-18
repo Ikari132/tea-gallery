@@ -1,5 +1,5 @@
 <script lang="ts">
-  import LinkButton from "./../../components/LinkButton.svelte";
+  import LinkButton from "./../../../components/LinkButton.svelte";
   import { _ } from "svelte-i18n";
   let amount = 5;
   let temperature = 90;
