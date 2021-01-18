@@ -1,10 +1,12 @@
 <script lang="ts">
   import { setupI18n } from "./../i18n";
   import Navbar from "./../components/Navbar.svelte";
+  import GlobalStyles from "./../components/GlobalStyles.svelte";
   setupI18n();
   // export let segment: string;
 </script>
 
+<GlobalStyles />
 <main>
   <slot />
 </main>
@@ -14,6 +16,10 @@
   :global(*) {
     box-sizing: border-box;
   }
+  :global(.app) {
+    height: 100%;
+    min-height: 100%;
+  }
 
   main {
     position: relative;
@@ -22,7 +28,7 @@
     height: 100%;
 
     background-color: white;
-    padding: 2em;
+    // padding: 2em;
     margin: 0 auto;
     box-sizing: border-box;
   }
