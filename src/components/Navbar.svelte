@@ -25,7 +25,7 @@
 <nav class="main-toolbar glass-25">
   {#each routes as route}
     <div class="main-toolbar__button">
-      <a href={route.path}>
+      <a href={route.path} rel="prefetch">
         <div class="icon">
           <svelte:component this={route.icon} />
         </div>

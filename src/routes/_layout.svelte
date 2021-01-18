@@ -1,9 +1,15 @@
-<script lang="ts">
+<script lang="ts" context="module">
   import { setupI18n } from "./../i18n";
+  setupI18n();
+</script>
+
+<script lang="ts">
   import Navbar from "./../components/Navbar.svelte";
   import GlobalStyles from "./../components/GlobalStyles.svelte";
-  setupI18n();
-  // export let segment: string;
+  export let segment: string;
+  $: {
+    console.log(segment, "layout segment");
+  }
 </script>
 
 <GlobalStyles />

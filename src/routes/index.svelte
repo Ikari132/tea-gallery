@@ -1,6 +1,7 @@
 <script lang="ts">
-  import TeaGroup from "./../components/TeaGroup.svelte";
+  import { goto } from "@sapper/app";
   import { _ } from "svelte-i18n";
+  import TeaGroup from "./../components/TeaGroup.svelte";
   import { currentTeaStore } from "./../stores/currentTeaStore";
   import { galleryStore } from "./../stores/galleryStore";
 
@@ -10,7 +11,7 @@
     const tea = e.detail;
     console.log("tea select", tea);
     currentTeaStore.update((val) => tea);
-    // navigate("/brew/method");
+    goto("/brew/method");
   }
 </script>
 
@@ -19,7 +20,7 @@
   <div class="content">
     <h2>Perfect for this time, lets brew it</h2>
     {#if gallery.length}
-      <TeaGroup teaGroup={gallery[0]} />
+      <TeaGroup teaGroup={gallery[0]} on:select={handleTeaSelect} />
     {/if}
   </div>
 </div>
