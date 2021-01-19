@@ -7,15 +7,32 @@ export interface ITea {
     time: number;
     temperature: number;
     method: TBrewingMethod[];
-    rating: number;
     description: string;
     price: string;
     tags: string[];
     inStock: boolean;
-    tasteProfile?:ITasteProfile;
+    count?: number;
+    rating?: number;
+    tasteProfile?: ITasteProfile[];
 }
-export interface ITasteProfile{
-    
+// [todo] make type more friendly for beginners
+export type TProfile =
+    "earth"
+    | "wood"
+    | "smoke"
+    | "nuts"
+    | "spice"
+    | "fruit"
+    | "milk"
+    | "sweet"
+    | "flower"
+    | "vegetable"
+    | "grass"
+    | "mineral"
+    | "sour";
+
+export interface ITasteProfile {
+    type: TProfile;
 }
 export type ITeaType =
     "GREEN" |

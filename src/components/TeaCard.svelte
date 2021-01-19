@@ -17,37 +17,47 @@
 </script>
 
 <div
-  class="tea-card flex flex-col items-start justify-between bg-white rounded-xl shadow p-4"
+  class="tea-card flex flex-col items-start justify-start bg-white rounded-xl shadow p-4 mr-4"
 >
-  <h2 class="text-lg font-bold flex justify-between w-full">
-    {tea.name}
+  <div class="flex justify-end w-full">
     <Icon color={CATEGORIES_COLOR[tea.type.toUpperCase()]}>
       <FaLeaf />
     </Icon>
-  </h2>
-  <div class="flex justify-center items-center w-full">
-    <RatingNumber rating={tea.rating} />
-    <BrewsCount />
   </div>
-  {#if tea.tasteProfile}
-    <div class="flex">
-      {#each tea.tasteProfile as tasteProfile}
-        <Icon>
-          <FaLeaf />
-        </Icon>
-      {/each}
+  <h2 class="text-lg font-bold flex justify-between w-full pb-4">
+    {tea.name}
+  </h2>
+  {#if tea.rating}
+    <div class="flex justify-center items-center w-full">
+      <RatingNumber rating={tea.rating} />
+      <BrewsCount />
     </div>
+    {#if tea.tasteProfile}
+      <div class="flex items-center justify-center w-full py-6">
+        {#each tea.tasteProfile as tasteProfile}
+          <div class="flex flex-col items-center justify-center px-2">
+            <Icon>
+              <FaLeaf />
+            </Icon>
+            {tasteProfile.type}
+          </div>
+        {/each}
+      </div>
+      <Button on:click={clickHandler} fullWidth>Brew</Button>
+    {/if}
+  {:else}
+    <Button on:click={clickHandler} fullWidth>Brew and rate</Button>
   {/if}
-  <Button on:click={clickHandler} fullWidth>Brew</Button>
 </div>
 
 <style lang="scss">
   .tea-card {
-    min-height: 200px;
+    min-height: 250px;
     min-width: 200px;
 
+    // height: 300px;
     width: 200px;
-    height: 200px;
+
     background: #fff;
     padding: 20px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);

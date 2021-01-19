@@ -14,6 +14,30 @@
                 "description": "",
                 "price": "",
                 "tags": "",
+                "inStock": true,
+                "tasteProfile": [
+                    {
+                        "type": "smoke"
+                    },
+                    {
+                        "type": "wood"
+                    },
+                    {
+                        "type": "sour"
+                    }
+                ]
+            },
+            {
+                "type": "green",
+                "name": "Чжень Май",
+                "time": 15,
+                "temperature": 80,
+                "method": [
+                    "teapod"
+                ],
+                "description": "",
+                "price": "",
+                "tags": "",
                 "inStock": true
             }
         ]
@@ -36,7 +60,18 @@
                 "tags": [
                     "evening"
                 ],
-                "inStock": true
+                "inStock": true,
+                "tasteProfile": [
+                    {
+                        "type": "smoke"
+                    },
+                    {
+                        "type": "wood"
+                    },
+                    {
+                        "type": "sour"
+                    }
+                ]
             }
         ]
     }

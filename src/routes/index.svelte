@@ -18,7 +18,11 @@
 <div class="wrapper day">
   <div class="sun" />
   <div class="content">
-    <h2>Perfect for this time, lets brew it</h2>
+    <div class="flex items-center justify-center w-full px-16 ">
+      <h2 class="text-lg font-bold flex items-center justify-center w-32">
+        Perfect for this time, lets brew it
+      </h2>
+    </div>
     {#if gallery.length}
       <TeaGroup teaGroup={gallery[0]} on:select={handleTeaSelect} />
     {/if}

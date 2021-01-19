@@ -13,7 +13,7 @@
   }
 </script>
 
-<div class="tea-group flex flex-col my-4">
+<div class="tea-group flex flex-col py-2 my-4">
   <!-- <h2 class="flex items-center justify-start bg-gray-100 rounded-xl shadow p-4">
     <div
       class="tea-group__badge w-4 mr-2 rounded-full"
@@ -21,7 +21,7 @@
     />
     {teaGroup.type}
   </h2> -->
-  <div class="flex flex-row">
+  <div class="flex flex-row w-full">
     {#each teaGroup.list as tea}
       <TeaCard {tea} on:select={handleTeaSelect} />
     {/each}
@@ -30,6 +30,7 @@
 
 <style lang="scss">
   .tea-group {
+    overflow-x: auto;
     &__badge {
       width: 20px;
       height: 20px;
