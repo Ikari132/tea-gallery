@@ -113,21 +113,20 @@
   // }
   .wrapper {
     width: 100%;
-    height: 100%;
     min-height: 100%;
     position: relative;
     padding-top: calc(var(--sun-radius) / 2 + 20px);
     background: var(--main-background);
   }
-  .content {
-    min-height: 100%;
+  // .content {
+  //   min-height: 100%;
 
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 20px 20px 0px 0px;
-    position: relative;
-    z-index: 10;
-  }
+  //   backdrop-filter: blur(10px);
+  //   background: rgba(255, 255, 255, 0.4);
+  //   border-radius: 20px 20px 0px 0px;
+  //   position: relative;
+  //   z-index: 10;
+  // }
   .sun {
     position: absolute;
     top: 20px;

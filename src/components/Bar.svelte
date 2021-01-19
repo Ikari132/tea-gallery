@@ -31,7 +31,7 @@
   };
 
   let timePassed = 0;
-  let timeLeft = timeLimit;
+  $: timeLeft = timeLimit;
   let timerInterval: any = null;
   let remainingPathColor = COLOR_CODES.info.color;
 
