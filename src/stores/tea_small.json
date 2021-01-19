@@ -3,6 +3,7 @@
         "type": "green",
         "list": [
             {
+                "type": "green",
                 "name": "Чжень Май",
                 "time": 15,
                 "temperature": 80,
@@ -21,6 +22,7 @@
         "type": "red",
         "list": [
             {
+                "type": "red",
                 "name": "Лапсанг Сушонг",
                 "time": 30,
                 "temperature": 95,

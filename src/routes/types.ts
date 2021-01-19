@@ -1,6 +1,7 @@
 export type TBrewingMethod = "gaiwan" | "teapot";
 
 export interface ITea {
+    type: ITeaType;
     name: string;
     otherName?: string;
     time: number;
@@ -11,6 +12,10 @@ export interface ITea {
     price: string;
     tags: string[];
     inStock: boolean;
+    tasteProfile?:ITasteProfile;
+}
+export interface ITasteProfile{
+    
 }
 export type ITeaType =
     "GREEN" |

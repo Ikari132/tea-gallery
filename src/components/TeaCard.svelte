@@ -1,8 +1,12 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
+  import FaLeaf from "svelte-icons/fa/FaLeaf.svelte";
   import type { ITea } from "./../routes/types";
+  import { CATEGORIES_COLOR } from "./../routes/constants";
   import Button from "./../components/Button.svelte";
-  //   import Rating from "./Rating.svelte";
+  import RatingNumber from "./RatingNumber.svelte";
+  import BrewsCount from "./BrewsCount.svelte";
+  import Icon from "./Icon.svelte";
 
   export let tea: ITea;
   const dispatch = createEventDispatcher();
@@ -15,9 +19,25 @@
 <div
   class="tea-card flex flex-col items-start justify-between bg-white rounded-xl shadow p-4"
 >
-  <!-- <Rating rating={tea.rating} /> -->
-  <h2 class="text-lg font-bold">{tea.name}</h2>
-  <div>Temperature:{tea.temperature}</div>
+  <h2 class="text-lg font-bold flex justify-between w-full">
+    {tea.name}
+    <Icon color={CATEGORIES_COLOR[tea.type.toUpperCase()]}>
+      <FaLeaf />
+    </Icon>
+  </h2>
+  <div class="flex justify-center items-center w-full">
+    <RatingNumber rating={tea.rating} />
+    <BrewsCount />
+  </div>
+  {#if tea.tasteProfile}
+    <div class="flex">
+      {#each tea.tasteProfile as tasteProfile}
+        <Icon>
+          <FaLeaf />
+        </Icon>
+      {/each}
+    </div>
+  {/if}
   <Button on:click={clickHandler} fullWidth>Brew</Button>
 </div>
 
