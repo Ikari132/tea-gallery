@@ -1,5 +1,6 @@
 <div
   class="card flex flex-col items-start justify-start rounded-xl shadow p-4 mr-4 {$$props.class}"
+  style={$$props.style}
 >
   <slot />
 </div>

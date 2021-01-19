@@ -3,6 +3,23 @@
   import { _ } from "svelte-i18n";
   import Button from "./../../../components/Button.svelte";
   import Water from "./../../../components/Water.svelte";
+  import { CATEGORIES_BREW_TIME } from "../../constants";
+  import { onMount } from "svelte";
+  import type { ITeaType } from "../../types";
+
+  let brewingTime = 10;
+  let teaType: ITeaType;
+
+  onMount(() => {
+    //[todo] maybe store this value in store
+    if (window) {
+      const hash = `${window.location.hash}`.replace("#", "");
+      if (CATEGORIES_BREW_TIME[hash]) {
+        teaType = hash as ITeaType;
+        brewingTime = CATEGORIES_BREW_TIME[hash];
+      }
+    }
+  });
 
   // let counter = 0;
   let counter = writable(0);
@@ -26,14 +43,27 @@
   }
 </script>
 
-<div class="flex flex-col items-center justify-center mt-4">
-  <div class="flex flex-col bg-white rounded shadow p-8">
-    <h1 class="mb-8 ps-4 flex justify-center">Brewing counter</h1>
+<div class="content flex flex-col items-center justify-center">
+  <div class="flex flex-col bg-white">
+    <!-- <h1 class="mb-8 ps-4 flex justify-center">Brewing counter</h1> -->
 
-    <Water filling={fill} on:drain={resetButton} fillCount={counterValue} />
+    <Water
+      filling={fill}
+      on:drain={resetButton}
+      fillCount={counterValue}
+      {brewingTime}
+      {teaType}
+    />
 
-    <p class="mb-4 p-4 flex justify-center">
-      {#if $counter}{$_("fill")} {$_("number")} {counterValue}{/if}
+    <p class="mb-4 p-4 flex flex-col justify-center items-center">
+      {#if $counter}
+        <div class="text-md text-center">
+          {$_("fill")}
+        </div>
+        <div class="text-2xl font-bold text-center">
+          {counterValue}
+        </div>
+      {/if}
     </p>
 
     <Button on:click={startFill} disabled={fill}>

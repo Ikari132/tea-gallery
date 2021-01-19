@@ -38,7 +38,7 @@
     </h2>
     <div class="grid grid-col-2 gap-4 grid-flow-col w-full px-4">
       <div class="w-full">
-        <a href="/brew/timer">
+        <a href="/brew/type">
           <Card class="quick-action-card items-center justify-start w-full">
             <Icon width={80} height={80}>
               <FaRegClock />
