@@ -21,10 +21,7 @@
     }
   });
 
-  // let counter = 0;
   let counter = writable(0);
-  let counterValue = $counter;
-
   let fill = false;
 
   function startFill() {
@@ -45,7 +42,7 @@
       <Water
         filling={fill}
         on:drain={resetButton}
-        fillCount={counterValue}
+        fillCount={$counter}
         {brewingTime}
         {teaType}
       />
@@ -56,7 +53,7 @@
             {$_("fill")}
           </div>
           <div class="title text-2xl font-bold text-center">
-            {counterValue}
+            {$counter}
           </div>
         {/if}
       </p>
