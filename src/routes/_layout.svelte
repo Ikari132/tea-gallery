@@ -19,14 +19,6 @@
 <Navbar />
 
 <style lang="scss">
-  :global(*) {
-    box-sizing: border-box;
-  }
-  :global(.app) {
-    height: 100%;
-    min-height: 100%;
-  }
-
   main {
     position: relative;
     max-width: 56em;

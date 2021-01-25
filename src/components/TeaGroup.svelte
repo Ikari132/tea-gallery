@@ -8,8 +8,8 @@
 
   const dispatch = createEventDispatcher();
 
-  function handleTeaSelect(tea: any) {
-    dispatch("select", tea);
+  function handleTeaSelect(e: any) {
+    dispatch("select", e.detail);
   }
 </script>
 

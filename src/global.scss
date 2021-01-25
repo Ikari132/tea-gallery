@@ -2,13 +2,63 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+:root {
+    --main-background-from: #139ce9;
+    --main-background-to: #8fe9e7;
+
+    --main-background: linear-gradient(180deg, var(--main-background-from) 0%, var(--main-background-to) 100%);
+
+    --sun-background-from: #ffff81;
+    --sun-background-to: #ffb800;
+    --sun-background: linear-gradient(180deg, var(--sun-background-from) 0%, var(--sun-background-to) 100%);
+
+    --font-color: rgba(0, 0, 0, 0.75);
+    --glass-blur: blur(40px);
+    --glass-color: rgba(255, 255, 255, 0.4);
+
+    --card-background: #fff;
+
+    @media (prefers-color-scheme: dark) {
+        --main-background-from: #424a89;
+        --main-background-to: #ec7e67;
+
+        --sun-background-from: #ffb800;
+        --sun-background-to: #bc0071;
+
+        --font-color: rgba(255, 255, 255, 0.95);
+
+        --glass-color: rgba(0, 0, 0, 0.4);
+
+        --card-background: #575757;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+.app {
+    min-height: 100%;
+    height: 100%;
+}
+.wrapper {
+    width: 100%;
+    min-height: 100%;
+    height: 100%;
+    position: relative;
+    background: var(--main-background);
+}
 .content {
     min-height: 100%;
+    height: 100%;
+    backdrop-filter: var(--glass-blur);
+    background: var(--glass-color);
 
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.4);
-    border-radius: 20px 20px 0px 0px;
     position: relative;
     z-index: 10;
     padding-bottom: 70px;
+
+    overflow: auto;
+}
+.title {
+    color: var(--font-color);
 }

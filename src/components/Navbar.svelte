@@ -2,6 +2,8 @@
   import FaHome from "svelte-icons/fa/FaHome.svelte";
   import FaBox from "svelte-icons/fa/FaBox.svelte";
   import FaRegUser from "svelte-icons/fa/FaRegUser.svelte";
+  import FaHistory from "svelte-icons/fa/FaHistory.svelte";
+  import FaRegListAlt from "svelte-icons/fa/FaRegListAlt.svelte";
 
   const routes = [
     {
@@ -10,14 +12,24 @@
       path: "/",
     },
     {
+      icon: FaRegListAlt,
+      name: "articles",
+      path: "/articles",
+    },
+    {
       icon: FaBox,
-      name: "gallery",
-      path: "/gallery",
+      name: "box",
+      path: "/box",
+    },
+    {
+      icon: FaHistory,
+      name: "history",
+      path: "/history",
     },
     {
       icon: FaRegUser,
-      name: "account",
-      path: "/account",
+      name: "settings",
+      path: "/settings",
     },
   ];
 </script>
@@ -25,9 +37,15 @@
 <nav class="main-toolbar glass-25">
   {#each routes as route}
     <div class="main-toolbar__button">
-      <a href={route.path} rel="prefetch">
+      <a
+        href={route.path}
+        rel="prefetch"
+        class="flex flex-col items-center justify-center">
         <div class="icon">
           <svelte:component this={route.icon} />
+        </div>
+        <div class="name">
+          {route.name}
         </div>
       </a>
     </div>
@@ -44,9 +62,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    // background: #fff;
+    background: var(--card-background);
+    border-radius: 20px 20px 0 0;
+
     padding: 0 20px;
     z-index: 9999;
+    color:var(--font-color);
 
     &__button {
       display: flex;
@@ -58,6 +79,9 @@
       .icon {
         width: 24px;
         height: 24px;
+      }
+      .name {
+        font-size: 12px;
       }
     }
   }

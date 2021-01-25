@@ -23,51 +23,47 @@
 
   // let counter = 0;
   let counter = writable(0);
-  let counterValue = 0;
-  let unsubscribeCounter = counter.subscribe((value) => {
-    counterValue = value;
-  });
+  let counterValue = $counter;
 
-  // let fill = writable(false);
   let fill = false;
 
   function startFill() {
     counter.update((v) => v + 1);
-    // fill.set(true);
     fill = true;
   }
   function resetButton() {
     console.log("on drain end");
-    // fill.set(false);
     fill = false;
   }
 </script>
 
-<div class="content flex flex-col items-center justify-center">
-  <div class="flex flex-col bg-white">
-    <!-- <h1 class="mb-8 ps-4 flex justify-center">Brewing counter</h1> -->
+<div class="wrapper">
+  <div class="content flex flex-col items-center justify-center">
+    <div class="flex flex-col">
+      <!-- <h1 class="mb-8 ps-4 flex justify-center">Brewing counter</h1> -->
 
-    <Water
-      filling={fill}
-      on:drain={resetButton}
-      fillCount={counterValue}
-      {brewingTime}
-      {teaType}
-    />
+      <Water
+        filling={fill}
+        on:drain={resetButton}
+        fillCount={counterValue}
+        {brewingTime}
+        {teaType}
+      />
 
-    <p class="mb-4 p-4 flex flex-col justify-center items-center">
-      {#if $counter}
-        <div class="text-md text-center">
-          {$_("fill")}
-        </div>
-        <div class="text-2xl font-bold text-center">
-          {counterValue}
-        </div>
-      {/if}
-    </p>
+      <p class="mb-4 p-4 flex flex-col justify-center items-center">
+        {#if $counter}
+          <div class="text-md text-center">
+            {$_("fill")}
+          </div>
+          <div class="title text-2xl font-bold text-center">
+            {counterValue}
+          </div>
+        {/if}
+      </p>
 
-    <Button on:click={startFill} disabled={fill}>
-      {fill ? $_("wait") : $_("start")}
-    </Button>
+      <Button on:click={startFill} disabled={fill}>
+        {fill ? $_("wait") : $_("start")}
+      </Button>
+    </div>
   </div>
 </div>

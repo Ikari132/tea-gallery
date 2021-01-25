@@ -2,37 +2,31 @@
   import { _ } from "svelte-i18n";
   import { BrewingGlasses } from "./../../constants";
   import { currentTeaStore } from "./../../../stores/currentTeaStore";
+  import Card from "./../../../components/Card.svelte";
 
-  let currentTea = {};
-  const unsubscribeCurrentTeaStore = currentTeaStore.subscribe((val) => {
-    currentTea = val;
-  });
+  let currentTea = $currentTeaStore;
 
   $: {
     console.log("curr tea", currentTea);
   }
-
-  let { name } = currentTea as any;
+  let name = (currentTea as any).name;
 </script>
 
-<div class="flex flex-col items-center justify-center mt-4">
-  <div class="flex flex-col bg-white rounded shadow p-4">
-    <h1 class="mb-8 ps-4 flex justify-center">
-      {$_("prepare_for_brewing")}
+<div class="wrapper">
+  <div class="content p-4">
+    <h1 class="title mb-8 ps-4 flex justify-center">
+      {$_("choose_glass")}
     </h1>
-    {name}
-    <ul class="list-none flex flex-row">
+
+    <div class="title py-4 text-2xl">{name}</div>
+    <div class="grid grid-cols-3 gap-4 items-center justify-center">
       {#each BrewingGlasses as glass}
-        <li>
-          <a href="/brew/method">
-            <div
-              class="m-2 p-4 text-md text-white bg-blue-500 rounded cursor-pointer select-none hover:bg-blue-600 active:bg-blue-700"
-            >
-              {glass}
-            </div>
-          </a>
-        </li>
+        <a href="/brew/prepare">
+          <Card class="w-full">
+            <h2 class="text-md">{glass}</h2>
+          </Card>
+        </a>
       {/each}
-    </ul>
+    </div>
   </div>
 </div>

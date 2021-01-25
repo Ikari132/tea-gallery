@@ -17,7 +17,7 @@
 </script>
 
 <div
-  class="tea-card flex flex-col items-start justify-start bg-white rounded-xl shadow p-4 {$$props.class}"
+  class="tea-card flex flex-col items-start justify-start rounded-xl shadow p-4 {$$props.class}"
 >
   <div class="flex justify-end w-full">
     <Icon color={CATEGORIES_COLOR[tea.type.toUpperCase()]}>
@@ -58,7 +58,9 @@
     // height: 300px;
     width: 200px;
 
-    background: #fff;
+    background: var(--card-background);
+    color: var(--font-color);
+
     padding: 20px;
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
